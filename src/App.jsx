@@ -68,35 +68,49 @@ export default function App() {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
-  const handleButtonClick = option => {
-    setGood(prevState => ({
-      [option]: prevState[option] + 1,
-    }));
+  const handleButtonClick = () => {
+    setGood(prevGood => prevGood + 1);
+    setNeutral(prevNeutral => prevNeutral + 1);
+    setBad(prevBad => prevBad + 1);
+  };
 
-    return (
-      <div className={css.container}>
-        //{' '}
-        <Section title="Please leave feedback">
-          //{' '}
-          <FeedbackOptions
-            options={['good', 'neutral', 'bad']}
-            handleClick={handleButtonClick}
-          />
-        </Section>
-        <Section title="Statistics">
-          {totalFeedback ? (
-            <Statistics
-              good={good}
-              neutral={neutral}
-              bad={bad}
-              total={totalFeedback}
-              totalPercentage={totalPercentage}
-            />
-          ) : (
-            <Notification message="There is no feedback" />
-          )}
-        </Section>
-      </div>
+  countTotalFeedback = () => {
+    return Object.values(setGood + setBad + setNeutral).reduce(
+      (total, curr) => (total += curr)
     );
   };
+
+  countPositiveFeedbackPercentage = totalFeedback => {
+    // const [good, setGood] = useState(0);
+
+    if (totalFeedback > 0) return Math.round((setGood / totalFeedback) * 100);
+    return 0;
+  };
+
+  const totalFeedback = countTotalFeedback();
+  const totalPercentage = countPositiveFeedbackPercentage(totalFeedback);
+
+  return (
+    <div className={css.container}>
+      <Section title="Please leave feedback">
+        <FeedbackOptions
+          options={['good', 'neutral', 'bad']}
+          handleClick={handleButtonClick}
+        />
+      </Section>
+      <Section title="Statistics">
+        {totalFeedback ? (
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={totalFeedback}
+            totalPercentage={totalPercentage}
+          />
+        ) : (
+          <Notification message="There is no feedback" />
+        )}
+      </Section>
+    </div>
+  );
 }
