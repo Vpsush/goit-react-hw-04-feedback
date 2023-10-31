@@ -68,19 +68,25 @@ export default function App() {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
-  const handleButtonClick = () => {
+  const handleButtonClickGood = () => {
     setGood(prevGood => prevGood + 1);
+  };
+
+  const handleButtonClickNeutral = () => {
     setNeutral(prevNeutral => prevNeutral + 1);
+  };
+
+  const handleButtonClickBad = () => {
     setBad(prevBad => prevBad + 1);
   };
 
-  countTotalFeedback = () => {
+  const countTotalFeedback = () => {
     return Object.values(setGood + setBad + setNeutral).reduce(
       (total, curr) => (total += curr)
     );
   };
 
-  countPositiveFeedbackPercentage = totalFeedback => {
+  const countPositiveFeedbackPercentage = totalFeedback => {
     // const [good, setGood] = useState(0);
 
     if (totalFeedback > 0) return Math.round((setGood / totalFeedback) * 100);
@@ -95,7 +101,7 @@ export default function App() {
       <Section title="Please leave feedback">
         <FeedbackOptions
           options={['good', 'neutral', 'bad']}
-          handleClick={handleButtonClick}
+          handleClick={handleButtonClickBad}
         />
       </Section>
       <Section title="Statistics">
