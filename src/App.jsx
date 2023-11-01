@@ -104,7 +104,7 @@ export default function App() {
       <Section title="Please leave feedback">
         <FeedbackOptions
           options={['good', 'neutral', 'bad']}
-          handleClick={totalSum}
+          // handleClick={totalSum}
         />
       </Section>
       <Section title="Statistics">
