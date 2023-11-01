@@ -86,6 +86,9 @@ export default function App() {
     );
   };
 
+  // const totalSum =  {
+  //   handleButtonClickNeutral + handleButtonClickBad + handleButtonClickGood
+  // };
   const countPositiveFeedbackPercentage = totalFeedback => {
     // const [good, setGood] = useState(0);
 
@@ -101,7 +104,7 @@ export default function App() {
       <Section title="Please leave feedback">
         <FeedbackOptions
           options={['good', 'neutral', 'bad']}
-          handleClick={handleButtonClickBad}
+          handleClick={totalSum}
         />
       </Section>
       <Section title="Statistics">
