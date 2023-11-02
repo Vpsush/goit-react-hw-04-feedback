@@ -68,21 +68,7 @@ export default function App() {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
-  // const handleButtonClickGood = () => {
-  //   setGood(prevGood => prevGood + 1);
-  // };
-
-  // const handleButtonClickNeutral = () => {
-  //   setNeutral(prevNeutral => prevNeutral + 1);
-  // };
-
-  // const handleButtonClickBad = () => {
-  //   setBad(prevBad => prevBad + 1);
-  // };
-
   const handleButtonClick = e => {
-    // const { number } = e.target;
-
     switch (e) {
       case 'good':
         setGood(good + 1);
@@ -99,18 +85,9 @@ export default function App() {
     }
   };
 
-  // const countTotalFeedback = () => {
-  //   return Object.values(setGood + setBad + setNeutral).reduce(
-  //     (total, curr) => (total += curr)
-  //   );
-  // };
-
   const totalSum = good + bad + neutral;
 
   const countPositiveFeedbackPercentage = Math.round((good / totalSum) * 100);
-
-  // const totalFeedback = countTotalFeedback();
-  // const totalPercentage = countPositiveFeedbackPercentage(totalFeedback);
 
   return (
     <div className={css.container}>
