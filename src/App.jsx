@@ -81,42 +81,36 @@ export default function App() {
   // };
 
   const handleButtonClick = e => {
-    const { number } = e.target;
-    
-    switch (number) {
+    // const { number } = e.target;
+
+    switch (e) {
       case 'good':
-        setGood(prevGood => prevGood + 1);
+        setGood(good + 1);
         break;
       case 'neutral':
-        setNeutral(prevNeutral => prevNeutral + 1);
+        setNeutral(neutral + 1);
         break;
       case 'bad':
-        setBad(prevBad => prevBad + 1);
+        setBad(bad + 1);
         break;
 
       default:
-        break;
+        return;
     }
   };
 
-  const countTotalFeedback = () => {
-    return Object.values(setGood + setBad + setNeutral).reduce(
-      (total, curr) => (total += curr)
-    );
-  };
-
-  // const totalSum =  {
-  //   handleButtonClickNeutral + handleButtonClickBad + handleButtonClickGood
+  // const countTotalFeedback = () => {
+  //   return Object.values(setGood + setBad + setNeutral).reduce(
+  //     (total, curr) => (total += curr)
+  //   );
   // };
-  const countPositiveFeedbackPercentage = totalFeedback => {
-    // const [good, setGood] = useState(0);
 
-    if (totalFeedback > 0) return Math.round((setGood / totalFeedback) * 100);
-    return 0;
-  };
+  const totalSum = good + bad + neutral;
 
-  const totalFeedback = countTotalFeedback();
-  const totalPercentage = countPositiveFeedbackPercentage(totalFeedback);
+  const countPositiveFeedbackPercentage = Math.round((good / totalSum) * 100);
+
+  // const totalFeedback = countTotalFeedback();
+  // const totalPercentage = countPositiveFeedbackPercentage(totalFeedback);
 
   return (
     <div className={css.container}>
@@ -127,13 +121,13 @@ export default function App() {
         />
       </Section>
       <Section title="Statistics">
-        {totalFeedback ? (
+        {totalSum ? (
           <Statistics
             good={good}
             neutral={neutral}
             bad={bad}
-            total={totalFeedback}
-            totalPercentage={totalPercentage}
+            total={totalSum}
+            totalPercentage={countPositiveFeedbackPercentage}
           />
         ) : (
           <Notification message="There is no feedback" />
